@@ -21,15 +21,17 @@ class _StoreViewState extends State<StoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('teasd'),
-        ),
-        body: ListView.builder(
-            itemCount: _storeItemsList.length,
-            itemBuilder: (_, index) {
-              return Card(
-                child: Text(_storeItemsList[index].name),
-              );
-            }));
+      appBar: AppBar(
+        title: const Text('teasd'),
+      ),
+      body: ListView.builder(
+        itemCount: _storeItemsList.length,
+        itemBuilder: (_, index) {
+          return Card(
+            child: Text(_storeItemsList[index].name),
+          );
+        },
+      ),
+    );
   }
 }
