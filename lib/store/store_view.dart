@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/store/blocs/store_events.dart';
+import 'package:framework/store/blocs/store_item_map_bloc.dart';
+import 'package:framework/store/blocs/store_item_map_state.dart';
 import 'package:framework/store/store_item_model.dart';
-import 'package:framework/store/store_service.dart';
+import 'package:framework/store/store_view_model.dart';
 
 class StoreView extends StatefulWidget {
   const StoreView({Key? key}) : super(key: key);
@@ -10,28 +14,52 @@ class StoreView extends StatefulWidget {
 }
 
 class _StoreViewState extends State<StoreView> {
-  late final List<StoreItem> _storeItemsList;
-
   @override
   void initState() {
     super.initState();
-    _storeItemsList = StoreService.fetchStoreItemsList();
+
+    final Map<String, int> _cleanMap = StoreViewModel.resetStoreItemMap();
+    context.read<StoreItemMapBloc>().add(ListInitialized(map: _cleanMap));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('teasd'),
-      ),
-      body: ListView.builder(
-        itemCount: _storeItemsList.length,
-        itemBuilder: (_, index) {
-          return Card(
-            child: Text(_storeItemsList[index].name),
-          );
-        },
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('Blocs'),
+        ),
+        body: BlocConsumer<StoreItemMapBloc, StoreItemMapState>(
+          listener: (context, state) {
+            setState(() {});
+          },
+          builder: (blocContext, state) {
+            if (state.map == null) {
+              return const SizedBox.shrink();
+            }
+            return ListView.builder(
+              itemCount: state.map?.length,
+              itemBuilder: (context, index) {
+                StoreItem _storeItem = StoreViewModel.storeItemFromIndex(index);
+                int _storeItemCount = state.map![_storeItem.name]!;
+
+                return GestureDetector(
+                  onTap: () {
+                    blocContext
+                        .read<StoreItemMapBloc>()
+                        .add(ItemCounterIncrement(itemName: _storeItem.name));
+                  },
+                  child: Card(
+                    child: Row(
+                      children: [
+                        Text(_storeItem.name),
+                        Text('$_storeItemCount'),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ));
   }
 }

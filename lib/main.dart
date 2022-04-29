@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:framework/store/store_view.dart';
 
 void main() {
@@ -16,7 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const StoreView(),
+      home: BlocProvider(
+        create: (_) => StoreItemMapBloc(),
+        child: const StoreView(),
+      ),
     );
   }
 }
