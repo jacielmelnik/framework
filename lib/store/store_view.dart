@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:framework/cart/cart_view.dart';
 import 'package:framework/settings/settings_view.dart';
 import 'package:framework/shared/app_localizations.dart';
+import 'package:framework/store/text_tag.dart';
 import 'package:framework/store/blocs/store_events.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_state.dart';
@@ -36,7 +37,7 @@ class _StoreViewState extends State<StoreView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Blocs'),
+          title: const Text('E-commerce'),
           actions: [
             IconButton(
                 onPressed: () {
@@ -74,16 +75,45 @@ class _StoreViewState extends State<StoreView> {
 
                 return GestureDetector(
                   onTap: () {
-                    blocContext
-                        .read<StoreItemMapBloc>()
-                        .add(ItemCounterIncrement(itemName: _storeItem.name));
+                    if (_storeItemCount == 0) {
+                      blocContext
+                          .read<StoreItemMapBloc>()
+                          .add(ItemCounterIncrement(itemName: _storeItem.name));
+                    } else {
+                      blocContext
+                          .read<StoreItemMapBloc>()
+                          .add(ItemCounterDecrement(itemName: _storeItem.name));
+                    }
                   },
                   child: Card(
-                    child: Row(
-                      children: [
-                        Text(AppLocalizations.translate(_storeItem.name)),
-                        Text('$_storeItemCount'),
-                      ],
+                    color: _storeItemCount == 0
+                        ? Colors.white
+                        : Theme.of(context).primaryColor.withOpacity(0.1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: SizedBox(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 12),
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Text(AppLocalizations.translate(_storeItem.name)),
+                          const Flexible(fit: FlexFit.tight, child: SizedBox()),
+                          (_storeItemCount == 0)
+                              ? const TextTag('select')
+                              : const TextTag('added')
+                        ],
+                      ),
                     ),
                   ),
                 );

@@ -14,5 +14,7 @@
     "login": "Login",
     "logout": "Logout",
     "english": "English",
-    "portuguese": "Portuguese"
+    "portuguese": "Portuguese",
+    "select": "Select",
+    "added": "Added to cart"
 }

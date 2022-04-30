@@ -45,6 +45,14 @@ class MyApp extends StatelessWidget {
             ),
             fontFamily: GoogleFonts.lato().fontFamily,
             primaryColor: const Color(0xFF5F3473),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xFF5F3473),
+              centerTitle: false,
+            ),
+            floatingActionButtonTheme: const FloatingActionButtonThemeData(
+              backgroundColor: Color(0xFF048A81),
+            ),
+            cardTheme: const CardTheme(elevation: 0),
           ),
           routes: {
             '/': (_) => const InitView(),
