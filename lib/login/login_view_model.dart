@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:framework/store/store_view.dart';
 
 class LoginViewModel {
-  static final TextEditingController _usernameTextController =
+  static final TextEditingController _emailTextController =
       TextEditingController(text: '');
   static final TextEditingController _passwordTextController =
       TextEditingController(text: '');
@@ -15,8 +15,8 @@ class LoginViewModel {
     ));
   }
 
-  static usernameTextController() {
-    return _usernameTextController;
+  static emailTextController() {
+    return _emailTextController;
   }
 
   static passwordTextController() {

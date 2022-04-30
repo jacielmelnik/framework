@@ -61,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
         child: Column(
           children: [
             Expanded(child: Container()),
-            //USERNAME
+            //EMAIL
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               height: 64,
@@ -72,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       const SizedBox(width: 12),
                       Text(
-                        AppLocalizations.translate('username').toUpperCase(),
+                        AppLocalizations.translate('email').toUpperCase(),
                       ),
                     ],
                   ),
@@ -86,9 +86,9 @@ class _LoginViewState extends State<LoginView> {
                           BorderRadiusDirectional.all(Radius.circular(12)),
                     ),
                     child: TextField(
-                      autofillHints: const [AutofillHints.username],
+                      autofillHints: const [AutofillHints.email],
                       textCapitalization: TextCapitalization.none,
-                      controller: LoginViewModel.usernameTextController(),
+                      controller: LoginViewModel.emailTextController(),
                       obscureText: false,
                       expands: false,
                       decoration: const InputDecoration(
@@ -101,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
                           size: 24,
                         ),
                       ),
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                     ),
                   ),
