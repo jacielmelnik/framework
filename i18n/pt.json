@@ -5,5 +5,8 @@
     "mango": "Manga",
     "pineapple": "Abacaxi",
     "checkout": "Finalizar",
-    "generate_receipt": "Gerar recibo"
+    "generate_receipt": "Gerar recibo",
+    "email": "E-mail",
+    "password": "Senha",
+    "new_user_question": "Novo usuário?"
 }

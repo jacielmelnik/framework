@@ -5,5 +5,8 @@
     "mango": "Mango",
     "pineapple": "Pineapple",
     "checkout": "Checkout",
-    "generate_receipt": "Generate receipt"
+    "generate_receipt": "Generate receipt",
+    "email": "E-mail",
+    "password": "Password",
+    "new_user_question": "New user?"
 }
