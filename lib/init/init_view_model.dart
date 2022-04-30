@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:framework/firebase_options.dart';
 import 'package:framework/login/login_view.dart';
 import 'package:framework/shared/app_localizations.dart';
+import 'package:framework/constants.dart';
 
 class InitViewModel {
   static Future<void> initializeApp(BuildContext context) async {
@@ -11,10 +12,11 @@ class InitViewModel {
 
     await AppLocalizations.load();
 
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) {
-        return const LoginView();
-      },
-    ));
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          settings: const RouteSettings(name: Constants.loginRouteName),
+          builder: (_) => const LoginView(),
+        ));
   }
 }

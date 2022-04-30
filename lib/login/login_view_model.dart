@@ -18,7 +18,7 @@ class LoginViewModel {
 
       print('Firebase credential used to log in: $_credential');
 
-      Navigator.pushReplacement(context, MaterialPageRoute(
+      Navigator.push(context, MaterialPageRoute(
         builder: (context) {
           return const StoreView();
         },

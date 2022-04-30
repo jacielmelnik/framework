@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:framework/cart/cart_view.dart';
 import 'package:framework/settings/settings_view.dart';
@@ -27,7 +28,13 @@ class _StoreViewState extends State<StoreView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () {
+        var _androidAppRetain = const MethodChannel("android_app_retain");
+        _androidAppRetain.invokeMethod("sendToBackground");
+        return Future.value(false);
+      },
+      child: Scaffold(
         appBar: AppBar(
           title: const Text('Blocs'),
           actions: [
@@ -83,6 +90,8 @@ class _StoreViewState extends State<StoreView> {
               },
             );
           },
-        ));
+        ),
+      ),
+    );
   }
 }

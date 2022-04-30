@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:framework/login/login_view_model.dart';
 import 'package:framework/shared/app_localizations.dart';
 
@@ -21,31 +22,38 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(color: Colors.amber),
-        child: Column(
-          verticalDirection: VerticalDirection.up,
-          children: [
-            typingComponent(),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.5 -
-                  MediaQuery.of(context).viewPadding.top,
-              padding: EdgeInsets.fromLTRB(
-                  MediaQuery.of(context).size.width * 0.2,
-                  0,
-                  MediaQuery.of(context).size.width * 0.2,
-                  0),
-              //TODO: Add logo image
-              child: const SizedBox(),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () {
+        var _androidAppRetain = const MethodChannel("android_app_retain");
+        _androidAppRetain.invokeMethod("sendToBackground");
+        return Future.value(false);
+      },
+      child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(color: Colors.amber),
+          child: Column(
+            verticalDirection: VerticalDirection.up,
+            children: [
+              typingComponent(context),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.5 -
+                    MediaQuery.of(context).viewPadding.top,
+                padding: EdgeInsets.fromLTRB(
+                    MediaQuery.of(context).size.width * 0.2,
+                    0,
+                    MediaQuery.of(context).size.width * 0.2,
+                    0),
+                //TODO: Add logo image
+                child: const SizedBox(),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  typingComponent() {
+  typingComponent(BuildContext context) {
     return Container(
       color: const Color(0x1A000000),
       height: MediaQuery.of(context).size.height * 0.5,
@@ -54,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
           children: [
             Expanded(child: Container()),
             //EMAIL
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               height: 64,
               child: Column(
@@ -102,7 +110,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             const SizedBox(height: 8),
             //PASSWORD
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               height: 64,
               child: Column(

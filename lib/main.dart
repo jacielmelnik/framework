@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:framework/constants.dart';
 import 'package:framework/init/init_view.dart';
 import 'package:framework/login/login_view.dart';
-import 'package:framework/settings/settings_view.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           ),
           routes: {
             '/': (_) => const InitView(),
-            '/LOGIN': (_) => const LoginView()
+            Constants.loginRouteName: (_) => const LoginView()
           }),
     );
   }
