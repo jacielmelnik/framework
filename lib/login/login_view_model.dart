@@ -32,13 +32,15 @@ class LoginViewModel {
     }
   }
 
-  static register() async {
+  static register(BuildContext context) async {
     try {
       final UserCredential _credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailTextController.text.toLowerCase().trim(),
         password: _passwordTextController.text,
       );
+
+      Navigator.pop(context);
 
       print('Firebase credential created: $_credential');
     } on FirebaseAuthException catch (e) {

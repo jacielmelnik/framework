@@ -32,8 +32,19 @@ class MyApp extends StatelessWidget {
           supportedLocales: appSupportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           theme: ThemeData(
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF048A81),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+              ),
+            ),
+            textTheme: GoogleFonts.latoTextTheme(
+              Theme.of(context).textTheme,
+            ),
             fontFamily: GoogleFonts.lato().fontFamily,
-            primarySwatch: Colors.amber,
+            primaryColor: const Color(0xFF5F3473),
           ),
           routes: {
             '/': (_) => const InitView(),

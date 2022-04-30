@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:framework/login/login_interactive_widgets.dart';
 import 'package:framework/login/login_view_model.dart';
+import 'package:framework/login/register_modal_view.dart';
 import 'package:framework/shared/app_localizations.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
-  @override
-  _LoginViewState createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  bool? _isPasswordVisible;
-  final FocusNode _passwordFocusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-
-    _isPasswordVisible = false;
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -29,164 +16,54 @@ class _LoginViewState extends State<LoginView> {
         return Future.value(false);
       },
       child: Scaffold(
-        backgroundColor: Colors.amber,
+        backgroundColor: Theme.of(context).primaryColor,
         resizeToAvoidBottomInset: true,
         body: SizedBox(
           child: Column(
             verticalDirection: VerticalDirection.up,
             children: [
-              interactiveComponent(context),
+              Stack(
+                alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  LoginInteractiveWidget(
+                    buttonTitle: AppLocalizations.translate('login'),
+                    buttonCallback: () => {LoginViewModel.login(context)},
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0),
+                          ),
+                        ),
+                        context: context,
+                        builder: (_) {
+                          return const RegisterModalView();
+                        },
+                      );
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        0,
+                        0,
+                        MediaQuery.of(context).size.width * 0.1,
+                        MediaQuery.of(context).size.height * 0.08,
+                      ),
+                      child: Text(
+                        AppLocalizations.translate('new_user_question'),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  interactiveComponent(BuildContext context) {
-    return Container(
-      color: const Color(0x1A000000),
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: AutofillGroup(
-        child: Column(
-          children: [
-            Expanded(child: Container()),
-            //EMAIL
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: 64,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const SizedBox(width: 12),
-                      Text(
-                        AppLocalizations.translate('email').toUpperCase(),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    height: 40,
-                    padding: const EdgeInsets.only(left: 12, bottom: 2),
-                    decoration: const BoxDecoration(
-                      color: Color(0x33000000),
-                      borderRadius:
-                          BorderRadiusDirectional.all(Radius.circular(12)),
-                    ),
-                    child: TextField(
-                      autofillHints: const [AutofillHints.email],
-                      textCapitalization: TextCapitalization.none,
-                      controller: LoginViewModel.emailTextController(),
-                      obscureText: false,
-                      expands: false,
-                      decoration: const InputDecoration(
-                        isDense: true,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        suffixIcon: Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            //PASSWORD
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: 64,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const SizedBox(width: 12),
-                      Text(
-                        AppLocalizations.translate('password').toUpperCase(),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Container(
-                    height: 40,
-                    padding: const EdgeInsets.only(left: 12, bottom: 2),
-                    decoration: const BoxDecoration(
-                      color: Color(0x33000000),
-                      borderRadius:
-                          BorderRadiusDirectional.all(Radius.circular(12)),
-                    ),
-                    child: TextField(
-                      autofillHints: const [AutofillHints.password],
-                      focusNode: _passwordFocusNode,
-                      controller: LoginViewModel.passwordTextController(),
-                      obscureText: !_isPasswordVisible!,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        border: InputBorder.none,
-                        suffixIcon: InkWell(
-                          borderRadius: BorderRadius.circular(20),
-                          onTap: () => setState(
-                            () => _isPasswordVisible = !_isPasswordVisible!,
-                          ),
-                          child: Icon(
-                            _isPasswordVisible!
-                                ? Icons.visibility_outlined
-                                : Icons.visibility_off_outlined,
-                            size: 22,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      textInputAction: TextInputAction.done,
-                      onSubmitted: (_) {},
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(child: Container()),
-            //REGISTER BUTTON
-            ElevatedButton(
-              onPressed: () {
-                LoginViewModel.register();
-              },
-              child: Text(
-                AppLocalizations.translate('register').toUpperCase(),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 40),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero),
-              ),
-            ),
-            Expanded(child: Container()),
-            //LOGIN BUTTON
-            ElevatedButton(
-              onPressed: () {
-                LoginViewModel.login(context);
-              },
-              child: Text(
-                AppLocalizations.translate('login').toUpperCase(),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 40),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero),
-              ),
-            ),
-            const SizedBox(height: 40),
-          ],
         ),
       ),
     );
