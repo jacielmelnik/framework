@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:framework/cart/cart_view.dart';
+import 'package:framework/shared/app_localizations.dart';
 import 'package:framework/store/blocs/store_events.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_state.dart';
@@ -32,10 +33,11 @@ class _StoreViewState extends State<StoreView> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return const CartView();
-                });
+              context: context,
+              builder: (context) {
+                return const CartView();
+              },
+            );
           },
         ),
         body: BlocConsumer<StoreItemMapBloc, StoreItemMapState>(
@@ -47,6 +49,7 @@ class _StoreViewState extends State<StoreView> {
               return const SizedBox.shrink();
             }
             return ListView.builder(
+              shrinkWrap: true,
               itemCount: state.map?.length,
               itemBuilder: (context, index) {
                 StoreItem _storeItem = StoreViewModel.storeItemFromIndex(index);

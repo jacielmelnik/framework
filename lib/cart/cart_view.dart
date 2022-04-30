@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/shared/app_localizations.dart';
 import 'package:framework/store/blocs/store_events.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_state.dart';
@@ -17,14 +18,24 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<StoreItemMapBloc, StoreItemMapState>(
-          listener: (context, state) {
-            setState(() {});
-          },
-          builder: (blocContext, state) {
-            if (state.map == null) {
-              return const SizedBox.shrink();
-            }
-            return ListView.builder(
+      listener: (context, state) {
+        setState(() {});
+      },
+      builder: (blocContext, state) {
+        if (state.map == null) {
+          return const SizedBox.shrink();
+        }
+        return Column(
+          verticalDirection: VerticalDirection.up,
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                AppLocalizations.translate('checkout').toUpperCase(),
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
               itemCount: state.map?.length,
               itemBuilder: (context, index) {
                 StoreItem _storeItem = StoreViewModel.storeItemFromIndex(index);
@@ -46,8 +57,10 @@ class _CartViewState extends State<CartView> {
                   ),
                 );
               },
-            );
-          },
+            ),
+          ],
         );
+      },
+    );
   }
 }

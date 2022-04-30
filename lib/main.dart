@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/init/init_view.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
-import 'package:framework/store/store_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Framework',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            fontFamily: GoogleFonts.lato().fontFamily,
+            primarySwatch: Colors.amber,
           ),
-          routes: {'/': (_) => const StoreView()}),
+          routes: {'/': (_) => const InitView()}),
     );
   }
 }
