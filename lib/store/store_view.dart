@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/cart/cart_view.dart';
 import 'package:framework/store/blocs/store_events.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_state.dart';
@@ -28,6 +29,11 @@ class _StoreViewState extends State<StoreView> {
         appBar: AppBar(
           title: const Text('Blocs'),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          showModalBottomSheet(context: context, builder: (context) {
+            return const CartView();
+          });
+        },),
         body: BlocConsumer<StoreItemMapBloc, StoreItemMapState>(
           listener: (context, state) {
             setState(() {});
