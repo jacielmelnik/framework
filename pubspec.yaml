@@ -45,3 +45,9 @@ flutter:
   assets:
     - i18n/en.json
     - i18n/pt.json
+    - images/apple.png
+    - images/banana.png
+    - images/pear.png
+    - images/mango.png
+    - images/pineapple.png
+
