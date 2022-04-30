@@ -25,8 +25,9 @@ class ConfirmationView extends StatelessWidget {
           shrinkWrap: true,
           itemCount: storeItemMap.length,
           itemBuilder: (BuildContext context, int index) {
-            final MapEntry _item = storeItemMap.entries.elementAt(index);
-            return Text('${_item.key} _______ ${_item.value}');
+            final MapEntry _storeItem = storeItemMap.entries.elementAt(index);
+            return Text(
+                '${AppLocalizations.translate(_storeItem.key)} _______ ${_storeItem.value}');
           },
         ),
       ],

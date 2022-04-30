@@ -4,11 +4,11 @@ class StoreService {
   ///Returns the store items list
   static List<StoreItem> fetchStoreItemsList() {
     List<StoreItem> storeItemsList = [
-      StoreItem(name: 'maçã'),
+      StoreItem(name: 'apple'),
       StoreItem(name: 'banana'),
-      StoreItem(name: 'pêra'),
-      StoreItem(name: 'manga'),
-      StoreItem(name: 'abacaxi'),
+      StoreItem(name: 'pear'),
+      StoreItem(name: 'mango'),
+      StoreItem(name: 'pineapple'),
     ];
 
     return storeItemsList;

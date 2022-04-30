@@ -1,4 +1,9 @@
 {
+    "apple": "Maçã",
+    "banana": "Banana",
+    "pear": "Pêra",
+    "mango": "Manga",
+    "pineapple": "Abacaxi",
     "checkout": "Finalizar",
     "generate_receipt": "Gerar recibo"
 }

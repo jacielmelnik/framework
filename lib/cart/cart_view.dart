@@ -58,7 +58,7 @@ class _CartViewState extends State<CartView> {
                   child: Card(
                     child: Row(
                       children: [
-                        Text(_storeItem.name),
+                        Text(AppLocalizations.translate(_storeItem.name)),
                         Text('$_storeItemCount'),
                       ],
                     ),
