@@ -29,11 +29,15 @@ class _StoreViewState extends State<StoreView> {
         appBar: AppBar(
           title: const Text('Blocs'),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) {
-            return const CartView();
-          });
-        },),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return const CartView();
+                });
+          },
+        ),
         body: BlocConsumer<StoreItemMapBloc, StoreItemMapState>(
           listener: (context, state) {
             setState(() {});

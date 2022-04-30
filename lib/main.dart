@@ -13,15 +13,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Framework',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: BlocProvider(
-        create: (_) => StoreItemMapBloc(),
-        child: const StoreView(),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<StoreItemMapBloc>(create: (_) => StoreItemMapBloc())
+      ],
+      child: MaterialApp(
+          title: 'Framework',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          routes: {'/': (_) => const StoreView()}),
     );
   }
 }
