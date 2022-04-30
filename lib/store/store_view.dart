@@ -36,6 +36,7 @@ class _StoreViewState extends State<StoreView> {
       },
       child: Scaffold(
         appBar: AppBar(
+          leading: const SizedBox(),
           title: const Text('E-commerce'),
           actions: [
             IconButton(
