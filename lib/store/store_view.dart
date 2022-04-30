@@ -86,6 +86,7 @@ class _StoreViewState extends State<StoreView> {
                     }
                   },
                   child: Card(
+                    margin: const EdgeInsets.fromLTRB(4, 4, 4, 0),
                     color: _storeItemCount == 0
                         ? Colors.white
                         : Theme.of(context).primaryColor.withOpacity(0.1),
@@ -107,7 +108,13 @@ class _StoreViewState extends State<StoreView> {
                             ),
                           ),
                           const SizedBox(width: 16),
-                          Text(AppLocalizations.translate(_storeItem.name)),
+                          Text(
+                            AppLocalizations.translate(_storeItem.name),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
                           const Flexible(fit: FlexFit.tight, child: SizedBox()),
                           (_storeItemCount == 0)
                               ? const TextTag('select')
