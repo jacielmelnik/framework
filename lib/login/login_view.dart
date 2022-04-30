@@ -45,14 +45,6 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  loginButtonClick() async {
-    try {
-      await LoginViewModel.login(context);
-    } catch (e) {
-      print('Error loginButtonClick: $e');
-    }
-  }
-
   typingComponent() {
     return Container(
       color: const Color(0x1A000000),
@@ -163,10 +155,26 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             Expanded(child: Container()),
+            //REGISTER BUTTON
+            ElevatedButton(
+              onPressed: () {
+                LoginViewModel.register();
+              },
+              child: Text(
+                AppLocalizations.translate('register').toUpperCase(),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 40),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero),
+              ),
+            ),
+            Expanded(child: Container()),
             //LOGIN BUTTON
             ElevatedButton(
               onPressed: () {
-                loginButtonClick();
+                LoginViewModel.login(context);
               },
               child: Text(
                 AppLocalizations.translate('login').toUpperCase(),
