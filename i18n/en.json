@@ -8,5 +8,11 @@
     "generate_receipt": "Generate receipt",
     "email": "E-mail",
     "password": "Password",
-    "new_user_question": "New user?"
+    "new_user_question": "New user?",
+    "register": "Register",
+    "language": "Language",
+    "login": "Login",
+    "logout": "Logout",
+    "english": "English",
+    "portuguese": "Portuguese"
 }

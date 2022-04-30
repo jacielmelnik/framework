@@ -29,23 +29,14 @@ class _LoginViewState extends State<LoginView> {
         return Future.value(false);
       },
       child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(color: Colors.amber),
+        backgroundColor: Colors.amber,
+        resizeToAvoidBottomInset: true,
+        body: SizedBox(
           child: Column(
             verticalDirection: VerticalDirection.up,
             children: [
-              typingComponent(context),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.5 -
-                    MediaQuery.of(context).viewPadding.top,
-                padding: EdgeInsets.fromLTRB(
-                    MediaQuery.of(context).size.width * 0.2,
-                    0,
-                    MediaQuery.of(context).size.width * 0.2,
-                    0),
-                //TODO: Add logo image
-                child: const SizedBox(),
-              ),
+              interactiveComponent(context),
+              const SizedBox(),
             ],
           ),
         ),
@@ -53,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  typingComponent(BuildContext context) {
+  interactiveComponent(BuildContext context) {
     return Container(
       color: const Color(0x1A000000),
       height: MediaQuery.of(context).size.height * 0.5,

@@ -36,6 +36,7 @@ class AppLocalizations extends ChangeNotifier {
       AppLocalizations.load();
     }
     if (_localizedStrings![key] == null) {
+      print('--- MISSING LOCALIZATION KEY: $key');
       return key;
     }
     return _localizedStrings![key]!;

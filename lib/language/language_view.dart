@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:framework/settings/settings_view_model.dart';
+import 'package:framework/constants.dart';
+import 'package:framework/language/language_view_model.dart';
 import 'package:framework/shared/app_localizations.dart';
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key}) : super(key: key);
+class LanguageView extends StatelessWidget {
+  const LanguageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +16,15 @@ class SettingsView extends StatelessWidget {
       body: ListView(
         children: [
           ListTile(
-            title: Text(AppLocalizations.translate('language')),
+            title: Text(AppLocalizations.translate('english')),
             onTap: () {
-              SettingsViewModel.changeLanguage(context);
+              LanguageViewModel.changeToLanguage(AvailableLanguages.enUS);
             },
           ),
           ListTile(
-            title: Text(AppLocalizations.translate('logout')),
+            title: Text(AppLocalizations.translate('portuguese')),
             onTap: () {
-              SettingsViewModel.logout(context);
+              LanguageViewModel.changeToLanguage(AvailableLanguages.ptBR);
             },
           )
         ],
