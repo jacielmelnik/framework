@@ -1,3 +1,4 @@
 {
-    "checkout": "finalizar"
+    "checkout": "Finalizar",
+    "generate_receipt": "Gerar recibo"
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/cart/cart_view_model.dart';
+import 'package:framework/confirmation/confirmation_view.dart';
 import 'package:framework/shared/app_localizations.dart';
 import 'package:framework/store/blocs/store_events.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
@@ -29,7 +31,13 @@ class _CartViewState extends State<CartView> {
           verticalDirection: VerticalDirection.up,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return ConfirmationView(storeItemMap: state.map!);
+                    });
+              },
               child: Text(
                 AppLocalizations.translate('checkout').toUpperCase(),
               ),
