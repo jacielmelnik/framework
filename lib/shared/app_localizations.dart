@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,7 @@ class AppLocalizations extends ChangeNotifier {
   static Map<String, String>? _localizedStrings;
 
   static Future<bool> load({bool cache = false}) async {
-    String? language = 'pt';
+    String? language = Platform.localeName.split('_').first;
 
     // Load the language JSON file from the "lang" folder
     String jsonString =

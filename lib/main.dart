@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:framework/init/init_view.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final appSupportedLocales = <Locale>[
+    const Locale('pt'),
+    const Locale('en'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +27,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           title: 'Framework',
+          supportedLocales: appSupportedLocales,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
           theme: ThemeData(
             fontFamily: GoogleFonts.lato().fontFamily,
             primarySwatch: Colors.amber,

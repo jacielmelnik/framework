@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:framework/cart/cart_view_model.dart';
 import 'package:framework/confirmation/confirmation_view.dart';
 import 'package:framework/shared/app_localizations.dart';
 import 'package:framework/store/blocs/store_events.dart';
