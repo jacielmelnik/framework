@@ -25,7 +25,10 @@ class StoreItemMapBloc extends Bloc<StoreEvents, StoreItemMapState> {
       ItemCounterDecrement event, Emitter<StoreItemMapState> emit) {
     final Map<String, int> _map = state.map!;
     final int _currentCounterValue = _map[event.itemName]!;
-    _map[event.itemName] = _currentCounterValue - 1;
-    emit(state.copyWith(map: _map));
+    //Preventing negative items
+    if (_currentCounterValue > 0) {
+      _map[event.itemName] = _currentCounterValue - 1;
+      emit(state.copyWith(map: _map));
+    }
   }
 }
