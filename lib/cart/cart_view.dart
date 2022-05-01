@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:framework/cart/cart_view_model.dart';
 import 'package:framework/confirmation/confirmation_view.dart';
@@ -9,7 +10,6 @@ import 'package:framework/store/blocs/store_events.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_state.dart';
 import 'package:framework/store/store_item_model.dart';
-import 'package:framework/store/store_view_model.dart';
 import 'package:framework/store/text_tag.dart';
 
 class CartView extends StatefulWidget {
@@ -67,46 +67,61 @@ class _CartViewState extends State<CartView> {
                       CartViewModel.selectedItemForIndex(state.map!, index);
                   int _storeItemCount = state.map![_storeItem.name]!;
 
-                  return Card(
-                    margin: const EdgeInsets.fromLTRB(4, 4, 4, 0),
-                    child: SizedBox(
-                      height: Constants.kCartItemsHeight,
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          Text(
-                            AppLocalizations.translate(_storeItem.name),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
+                  return Slidable(
+                    endActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      extentRatio: 0.25,
+                      children: [
+                        SlidableAction(
+                          onPressed: (context) {
+                            blocContext.read<StoreItemMapBloc>().add(
+                                ItemCounterReset(itemName: _storeItem.name));
+                          },
+                          icon: FontAwesomeIcons.trashCan,
+                          backgroundColor: Colors.red.shade300,
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+                      child: SizedBox(
+                        height: Constants.kCartItemsHeight,
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 16),
+                            Text(
+                              AppLocalizations.translate(_storeItem.name),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             ),
-                          ),
-                          const Expanded(child: SizedBox()),
-                          IconButton(
-                            onPressed: () {
-                              blocContext.read<StoreItemMapBloc>().add(
-                                  ItemCounterDecrement(
-                                      itemName: _storeItem.name));
-                            },
-                            icon: Icon(
-                              FontAwesomeIcons.minus,
-                              color: Theme.of(context).primaryColor,
+                            const Expanded(child: SizedBox()),
+                            IconButton(
+                              onPressed: () {
+                                blocContext.read<StoreItemMapBloc>().add(
+                                    ItemCounterDecrement(
+                                        itemName: _storeItem.name));
+                              },
+                              icon: Icon(
+                                FontAwesomeIcons.minus,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             ),
-                          ),
-                          TextTag(_storeItemCount.toString()),
-                          //Text(child: Text('$_storeItemCount')),
-                          IconButton(
-                            onPressed: () {
-                              blocContext.read<StoreItemMapBloc>().add(
-                                  ItemCounterIncrement(
-                                      itemName: _storeItem.name));
-                            },
-                            icon: Icon(
-                              FontAwesomeIcons.plus,
-                              color: Theme.of(context).primaryColor,
+                            TextTag(_storeItemCount.toString()),
+                            IconButton(
+                              onPressed: () {
+                                blocContext.read<StoreItemMapBloc>().add(
+                                    ItemCounterIncrement(
+                                        itemName: _storeItem.name));
+                              },
+                              icon: Icon(
+                                FontAwesomeIcons.plus,
+                                color: Theme.of(context).primaryColor,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );

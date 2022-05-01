@@ -162,7 +162,7 @@ class _StoreViewState extends State<StoreView> {
                                         itemName: _storeItem.name));
                               } else {
                                 blocContext.read<StoreItemMapBloc>().add(
-                                    ItemCounterDecrement(
+                                    ItemCounterReset(
                                         itemName: _storeItem.name));
                               }
                             },

@@ -19,3 +19,9 @@ class ItemCounterDecrement extends StoreEvents {
 
   final String itemName;
 }
+
+class ItemCounterReset extends StoreEvents {
+  const ItemCounterReset({required this.itemName});
+
+  final String itemName;
+}

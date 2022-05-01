@@ -7,6 +7,7 @@ class StoreItemMapBloc extends Bloc<StoreEvents, StoreItemMapState> {
     on<ListInitialized>(_onInitialized);
     on<ItemCounterIncrement>(_onItemCounterIncrement);
     on<ItemCounterDecrement>(_onItemCounterDecrement);
+    on<ItemCounterReset>(_onItemCounterReset);
   }
 
   void _onInitialized(ListInitialized event, Emitter<StoreItemMapState> emit) {
@@ -30,5 +31,12 @@ class StoreItemMapBloc extends Bloc<StoreEvents, StoreItemMapState> {
       _map[event.itemName] = _currentCounterValue - 1;
       emit(state.copyWith(map: _map));
     }
+  }
+
+  void _onItemCounterReset(
+      ItemCounterReset event, Emitter<StoreItemMapState> emit) {
+    final Map<String, int> _map = state.map!;
+    _map[event.itemName] = 0;
+    emit(state.copyWith(map: _map));
   }
 }
