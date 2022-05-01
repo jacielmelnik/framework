@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:framework/cart/cart_view.dart';
 import 'package:framework/settings/settings_view.dart';
 import 'package:framework/shared/app_localizations.dart';
@@ -41,7 +42,12 @@ class _StoreViewState extends State<StoreView> {
       child: Scaffold(
         appBar: AppBar(
           leading: const SizedBox(),
-          title: const Text('E-commerce'),
+          title: Text(
+            AppLocalizations.translate('ecommerce'),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           actions: [
             IconButton(
                 onPressed: () {
@@ -53,6 +59,10 @@ class _StoreViewState extends State<StoreView> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            FontAwesomeIcons.cartShopping,
+            size: 18,
+          ),
           onPressed: () {
             showModalBottomSheet(
               context: context,

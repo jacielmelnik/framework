@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:framework/login/login_interactive_widgets.dart';
 import 'package:framework/login/login_view_model.dart';
 import 'package:framework/login/register_modal_view.dart';
 import 'package:framework/shared/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -61,7 +63,49 @@ class LoginView extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 140,
+                      width: 140,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.black.withOpacity(0.25)),
+                      child: const Icon(
+                        FontAwesomeIcons.cartShopping,
+                        color: Colors.white,
+                        size: 72,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'DESAFIO',
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 32,
+                          ),
+                        ),
+                        Text(
+                          'E-COMMERCE',
+                          style: GoogleFonts.lato(
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white,
+                            fontSize: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
