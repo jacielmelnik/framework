@@ -18,8 +18,6 @@ class LoginViewModel {
         password: _passwordTextController.text,
       );
 
-      print('Firebase credential used to log in: $_credential');
-
       LoginViewModel.storeFirebaseToken(_credential);
 
       Navigator.push(context, MaterialPageRoute(
@@ -33,11 +31,9 @@ class LoginViewModel {
 
       return;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      showModalBottomSheetWithErrorMessage(context, e.message.toString());
+    } catch (e) {
+      showModalBottomSheetWithErrorMessage(context, e.toString());
     }
   }
 
@@ -53,14 +49,31 @@ class LoginViewModel {
 
       LoginViewModel.login(context);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
+      showModalBottomSheetWithErrorMessage(context, e.message.toString());
     } catch (e) {
-      print(e);
+      showModalBottomSheetWithErrorMessage(context, e.toString());
     }
+  }
+
+  static showModalBottomSheetWithErrorMessage(
+      BuildContext context, String message) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.3,
+          alignment: Alignment.center,
+          child: Text(
+            'Error:' + message,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
+              fontSize: 18,
+            ),
+          ),
+        );
+      },
+    );
   }
 
   static _clearEmailAndPassword() {
