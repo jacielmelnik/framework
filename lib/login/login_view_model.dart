@@ -6,11 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel {
   static final TextEditingController _emailTextController =
-      TextEditingController(text: 'firebase@test.com');
+      TextEditingController(text: '');
   static final TextEditingController _passwordTextController =
-      TextEditingController(text: 'weakPASS123');
+      TextEditingController(text: '');
 
-  static login(BuildContext context) async {
+  static Future<void> login(BuildContext context) async {
     try {
       final UserCredential _credential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -27,6 +27,11 @@ class LoginViewModel {
           return const StoreView();
         },
       ));
+
+      //Clearing data after succesfully logging in
+      LoginViewModel._clearEmailAndPassword();
+
+      return;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -44,8 +49,6 @@ class LoginViewModel {
         password: _passwordTextController.text,
       );
 
-      Navigator.pop(context);
-
       print('Firebase credential created: $_credential');
 
       LoginViewModel.storeFirebaseToken(_credential);
@@ -60,6 +63,11 @@ class LoginViewModel {
     } catch (e) {
       print(e);
     }
+  }
+
+  static _clearEmailAndPassword() {
+    _emailTextController.text = "";
+    _passwordTextController.text = "";
   }
 
   static emailTextController() {
