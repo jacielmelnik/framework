@@ -1,6 +1,8 @@
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:framework/cart/cart_view_model.dart';
 import 'package:framework/confirmation/confirmation_view_model.dart';
+import 'package:framework/confirmation/receipt_viewer.dart';
 import 'package:framework/constants.dart';
 import 'package:framework/shared/app_localizations.dart';
 import 'package:framework/store/store_item_model.dart';
@@ -32,8 +34,26 @@ class ConfirmationView extends StatelessWidget {
         children: [
           const SizedBox(height: Constants.kFixedBottonHeight),
           ElevatedButton(
-            onPressed: () {
-              ConfirmationViewModel.generateReceipt(storeItemMap);
+            onPressed: () async {
+              PDFDocument? savedDocument =
+                  await ConfirmationViewModel.generateReceipt(storeItemMap);
+              if (savedDocument != null) {
+                showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      return ReceiptViewer(document: savedDocument);
+                    }).whenComplete(
+                  () {
+                    Navigator.pop(context);
+                  },
+                );
+              }
             },
             child: Text(
               AppLocalizations.translate('generate_receipt').toUpperCase(),

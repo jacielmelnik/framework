@@ -62,7 +62,7 @@ class _CartViewState extends State<CartView> {
                           context: context,
                           builder: (context) {
                             final Map<String, int> _purchasedItemsMap =
-                                state.map!;
+                                CartViewModel.selectedStoreItems(state.map!);
                             return ConfirmationView(
                                 storeItemMap: _purchasedItemsMap);
                           },

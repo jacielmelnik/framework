@@ -25,4 +25,15 @@ class CartViewModel {
     }
     return StoreItem(name: 'void');
   }
+
+  static Map<String, int> selectedStoreItems(Map<String, int> map) {
+    final Map<String, int> selectedItems = {};
+
+    for (var item in map.entries) {
+      if (item.value > 0) {
+        selectedItems[item.key] = item.value;
+      }
+    }
+    return selectedItems;
+  }
 }
