@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:framework/constants.dart';
 import 'package:framework/shared/user_storage.dart';
 import 'package:framework/store/store_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel {
   static final TextEditingController _emailTextController =

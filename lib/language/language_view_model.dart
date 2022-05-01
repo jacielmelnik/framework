@@ -6,7 +6,6 @@ import 'package:framework/shared/user_storage.dart';
 class LanguageViewModel {
   static changeToLanguage(
       BuildContext context, AvailableLanguages language) async {
-    print('Will translate to ${language.value}');
     UserStorage.setLanguageCode(language);
 
     //Definitelly not the best usability

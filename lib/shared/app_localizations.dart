@@ -3,9 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
-import 'package:framework/constants.dart';
 import 'package:framework/shared/user_storage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalizations extends ChangeNotifier {
   AppLocalizations._privateConstructor();

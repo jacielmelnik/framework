@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 ///The App views should depend on InheritedWidget to rebuild itself properly
 ///when the user changes the language
 class RestartAppWidget extends StatefulWidget {
-  const RestartAppWidget({required this.child});
+  const RestartAppWidget({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
