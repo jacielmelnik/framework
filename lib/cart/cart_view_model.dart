@@ -12,6 +12,7 @@ class CartViewModel {
   }
 
   static StoreItem selectedItemForIndex(Map<String, int> map, int index) {
+    //Can definitelly improve this method
     int _ignores = index;
     for (var entries in map.entries) {
       if (entries.value > 0) {

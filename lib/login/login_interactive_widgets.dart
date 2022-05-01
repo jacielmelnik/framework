@@ -155,9 +155,7 @@ class _LoginInteractiveWidgetState extends State<LoginInteractiveWidget> {
               style: ElevatedButton.styleFrom(
                   fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 40)),
             ),
-
-            Expanded(child: Container()),
-            const SizedBox(height: 40),
+            const SizedBox(height: 100),
           ],
         ),
       ),
