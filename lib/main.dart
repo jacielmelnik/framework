@@ -4,14 +4,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:framework/constants.dart';
 import 'package:framework/init/init_view.dart';
 import 'package:framework/login/login_view.dart';
+import 'package:framework/shared/restart_app.dart';
 import 'package:framework/store/blocs/search_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MyApp());
+  runApp(RestartAppWidget(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

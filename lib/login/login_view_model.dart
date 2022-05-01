@@ -26,9 +26,6 @@ class LoginViewModel {
         },
       ));
 
-      //Clearing data after succesfully logging in
-      LoginViewModel._clearEmailAndPassword();
-
       return;
     } on FirebaseAuthException catch (e) {
       showModalBottomSheetWithErrorMessage(context, e.message.toString());
@@ -76,7 +73,7 @@ class LoginViewModel {
     );
   }
 
-  static _clearEmailAndPassword() {
+  static clearEmailAndPassword() {
     _emailTextController.text = "";
     _passwordTextController.text = "";
   }

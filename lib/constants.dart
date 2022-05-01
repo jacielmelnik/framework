@@ -1,3 +1,5 @@
+///Keeping all constants centralized for better access
+///and human error mitigating
 class Constants {
   static const loginRouteName = '/LOGIN';
 
@@ -6,7 +8,9 @@ class Constants {
 
   static const double kCartItemsHeight = 40;
 
-  static String kFirebaseTokenKey = 'firebase_token_key';
+  static const String kFirebaseTokenKey = 'firebase_token_key';
+
+  static const String kLanguageCodeKey = 'language_code_key';
 }
 
 class AvailableLanguages {

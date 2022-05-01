@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:framework/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalizations extends ChangeNotifier {
   AppLocalizations._privateConstructor();
@@ -17,11 +19,19 @@ class AppLocalizations extends ChangeNotifier {
   static Map<String, String>? _localizedStrings;
 
   static Future<bool> load({bool cache = false}) async {
-    String? language = Platform.localeName.split('_').first;
+    String languageCode = Platform.localeName.split('_').first;
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool hasSavedLanguagePreference =
+        preferences.containsKey(Constants.kLanguageCodeKey);
+
+    if (hasSavedLanguagePreference) {
+      languageCode = preferences.getString(Constants.kLanguageCodeKey)!;
+    }
 
     // Load the language JSON file from the "lang" folder
     String jsonString =
-        await rootBundle.loadString('i18n/$language.json', cache: cache);
+        await rootBundle.loadString('i18n/$languageCode.json', cache: cache);
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     _localizedStrings = jsonMap.map((key, value) {

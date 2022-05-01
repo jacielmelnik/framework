@@ -23,13 +23,15 @@ class LanguageView extends StatelessWidget {
           ListTile(
             title: Text(AppLocalizations.translate('english')),
             onTap: () {
-              LanguageViewModel.changeToLanguage(AvailableLanguages.enUS);
+              LanguageViewModel.changeToLanguage(
+                  context, AvailableLanguages.enUS);
             },
           ),
           ListTile(
             title: Text(AppLocalizations.translate('portuguese')),
             onTap: () {
-              LanguageViewModel.changeToLanguage(AvailableLanguages.ptBR);
+              LanguageViewModel.changeToLanguage(
+                  context, AvailableLanguages.ptBR);
             },
           )
         ],
