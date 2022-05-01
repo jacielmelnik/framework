@@ -67,10 +67,11 @@ class _StoreViewState extends State<StoreView> {
             //Search component
             Container(
               height: 60,
-              color: const Color(0xFFFEFEFE),
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  cursorColor: Theme.of(context).primaryColor,
                   onChanged: (value) {
                     //Adds a bloc event when its text change
                     context
@@ -79,73 +80,87 @@ class _StoreViewState extends State<StoreView> {
                   },
                   decoration: InputDecoration(
                     labelText: AppLocalizations.translate('search'),
-                    prefixIcon: const Icon(Icons.search),
+                    floatingLabelStyle:
+                        TextStyle(color: Theme.of(context).primaryColor),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    focusColor: Theme.of(context).primaryColor,
                     border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
                 ),
               ),
             ),
-            //Store Items ListView has two BlocBuilders:
-            //
-            //One for the SEARCH events
-            //and another for the SELECTION events
-            BlocBuilder<SearchBloc, SearchState>(
-              builder: (searchBlocContext, searchState) {
-                return BlocBuilder<StoreItemMapBloc, StoreItemMapState>(
-                  builder: (blocContext, state) {
-                    if (state.map == null) {
-                      return const SizedBox.shrink();
-                    }
-                    //Builds the StoreItemsCards
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.map?.length,
-                      itemBuilder: (context, index) {
-                        StoreItem _storeItem =
-                            StoreViewModel.storeItemFromIndex(index);
-                        int _storeItemCount = state.map![_storeItem.name]!;
+            Expanded(
+              //Store Items ListView has two BlocBuilders:
+              //
+              //One for the SEARCH events
+              //and another for the SELECTION events
+              child: BlocBuilder<SearchBloc, SearchState>(
+                builder: (searchBlocContext, searchState) {
+                  return BlocBuilder<StoreItemMapBloc, StoreItemMapState>(
+                    builder: (blocContext, state) {
+                      if (state.map == null) {
+                        return const SizedBox.shrink();
+                      }
+                      //Builds the StoreItemsCards
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.map?.length,
+                        itemBuilder: (context, index) {
+                          StoreItem _storeItem =
+                              StoreViewModel.storeItemFromIndex(index);
+                          int _storeItemCount = state.map![_storeItem.name]!;
 
-                        //Filter searched items
-                        if (searchState.searchText != "") {
-                          //Using the item translation + lowercase
-                          //as default for comparing the search
-                          final String _translatedItemName =
-                              AppLocalizations.translate(_storeItem.name)
-                                  .toLowerCase();
-                          final String _searchText =
-                              searchState.searchText.toLowerCase();
+                          //Filter searched items
+                          if (searchState.searchText != "") {
+                            //Using the item translation + lowercase
+                            //as default for comparing the search
+                            final String _translatedItemName =
+                                AppLocalizations.translate(_storeItem.name)
+                                    .toLowerCase();
+                            final String _searchText =
+                                searchState.searchText.toLowerCase();
 
-                          if (!_translatedItemName.contains(_searchText)) {
-                            //Return a SizedBox if the search do NOT match
-                            return const SizedBox.shrink();
-                          }
-                        }
-
-                        return GestureDetector(
-                          onTap: () {
-                            //Handles the item selection with bloc events
-                            if (_storeItemCount == 0) {
-                              blocContext.read<StoreItemMapBloc>().add(
-                                  ItemCounterIncrement(
-                                      itemName: _storeItem.name));
-                            } else {
-                              blocContext.read<StoreItemMapBloc>().add(
-                                  ItemCounterDecrement(
-                                      itemName: _storeItem.name));
+                            if (!_translatedItemName.contains(_searchText)) {
+                              //Return a SizedBox if the search do NOT match
+                              return const SizedBox.shrink();
                             }
-                          },
-                          child: ItemStoreCard(
-                            itemCount: _storeItemCount,
-                            itemName: _storeItem.name,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
-              },
+                          }
+
+                          return GestureDetector(
+                            onTap: () {
+                              //Handles the item selection with bloc events
+                              if (_storeItemCount == 0) {
+                                blocContext.read<StoreItemMapBloc>().add(
+                                    ItemCounterIncrement(
+                                        itemName: _storeItem.name));
+                              } else {
+                                blocContext.read<StoreItemMapBloc>().add(
+                                    ItemCounterDecrement(
+                                        itemName: _storeItem.name));
+                              }
+                            },
+                            child: ItemStoreCard(
+                              itemCount: _storeItemCount,
+                              itemName: _storeItem.name,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),
