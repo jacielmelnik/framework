@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
           ),
           routes: {
             '/': (_) => const InitView(),
-            Constants.loginRouteName: (_) => LoginView()
+            Constants.loginRouteName: (_) => const LoginView()
           }),
     );
   }

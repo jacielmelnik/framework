@@ -49,8 +49,6 @@ class LoginViewModel {
         password: _passwordTextController.text,
       );
 
-      print('Firebase credential created: $_credential');
-
       LoginViewModel.storeFirebaseToken(_credential);
 
       LoginViewModel.login(context);

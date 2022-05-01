@@ -7,7 +7,7 @@ import 'package:framework/shared/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginView extends StatefulWidget {
-  LoginView({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();

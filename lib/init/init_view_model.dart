@@ -16,7 +16,7 @@ class InitViewModel {
       context,
       MaterialPageRoute(
         settings: const RouteSettings(name: Constants.loginRouteName),
-        builder: (_) => LoginView(),
+        builder: (_) => const LoginView(),
       ),
     );
   }
