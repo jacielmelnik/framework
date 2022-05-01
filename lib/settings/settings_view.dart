@@ -9,7 +9,12 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
+        title: Text(
+          AppLocalizations.translate('settings'),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: const BackButton(),
       ),
       body: ListView(

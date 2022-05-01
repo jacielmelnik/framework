@@ -23,5 +23,6 @@
     "product": "Product",
     "quantity": "Quantity",
     "successful_purchase": "Successful purchase!",
-    "empty_cart": "Empty cart!"
+    "empty_cart": "Empty cart!",
+    "settings": "Settings"
 }
