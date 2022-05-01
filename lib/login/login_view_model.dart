@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:framework/constants.dart';
+import 'package:framework/shared/user_storage.dart';
 import 'package:framework/store/store_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -87,12 +88,6 @@ class LoginViewModel {
   }
 
   static storeFirebaseToken(UserCredential credential) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString(Constants.kFirebaseTokenKey, credential.user!.uid);
-  }
-
-  static Future<String?> getStoredFirebaseToken() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString(Constants.kFirebaseTokenKey);
+    UserStorage.setFirebaseToken(credential.user!.uid);
   }
 }

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:framework/constants.dart';
+import 'package:framework/shared/user_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalizations extends ChangeNotifier {
@@ -19,15 +20,8 @@ class AppLocalizations extends ChangeNotifier {
   static Map<String, String>? _localizedStrings;
 
   static Future<bool> load({bool cache = false}) async {
-    String languageCode = Platform.localeName.split('_').first;
-
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool hasSavedLanguagePreference =
-        preferences.containsKey(Constants.kLanguageCodeKey);
-
-    if (hasSavedLanguagePreference) {
-      languageCode = preferences.getString(Constants.kLanguageCodeKey)!;
-    }
+    String languageCode = await UserStorage.getLanguageCode() ??
+        Platform.localeName.split('_').first;
 
     // Load the language JSON file from the "lang" folder
     String jsonString =
