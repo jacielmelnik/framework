@@ -13,10 +13,11 @@ class InitViewModel {
     await AppLocalizations.load();
 
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          settings: const RouteSettings(name: Constants.loginRouteName),
-          builder: (_) => const LoginView(),
-        ));
+      context,
+      MaterialPageRoute(
+        settings: const RouteSettings(name: Constants.loginRouteName),
+        builder: (_) => LoginView(),
+      ),
+    );
   }
 }

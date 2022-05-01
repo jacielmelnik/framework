@@ -5,6 +5,8 @@ class Constants {
   static const double kFixedBottonHeight = 40;
 
   static const double kCartItemsHeight = 40;
+
+  static String kFirebaseTokenKey = 'firebase_token_key';
 }
 
 class AvailableLanguages {

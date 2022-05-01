@@ -36,6 +36,7 @@ dependencies:
   pdf: ^3.7.4
   path_provider: ^2.0.9
   advance_pdf_viewer: ^2.0.1
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

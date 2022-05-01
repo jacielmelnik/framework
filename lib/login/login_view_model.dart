@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:framework/constants.dart';
 import 'package:framework/store/store_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel {
   static final TextEditingController _emailTextController =
@@ -17,6 +19,8 @@ class LoginViewModel {
       );
 
       print('Firebase credential used to log in: $_credential');
+
+      LoginViewModel.storeFirebaseToken(_credential);
 
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {
@@ -43,6 +47,10 @@ class LoginViewModel {
       Navigator.pop(context);
 
       print('Firebase credential created: $_credential');
+
+      LoginViewModel.storeFirebaseToken(_credential);
+
+      LoginViewModel.login(context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -60,5 +68,15 @@ class LoginViewModel {
 
   static passwordTextController() {
     return _passwordTextController;
+  }
+
+  static storeFirebaseToken(UserCredential credential) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(Constants.kFirebaseTokenKey, credential.user!.uid);
+  }
+
+  static Future<String?> getStoredFirebaseToken() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(Constants.kFirebaseTokenKey);
   }
 }
