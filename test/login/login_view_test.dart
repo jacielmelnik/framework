@@ -22,7 +22,7 @@ void main() {
       await tester.pumpAndSettle();
 
       var email = find.text(AppLocalizations.translate('email').toUpperCase());
-      expectLater(email, findsOneWidget);
+      expect(email, findsOneWidget);
     });
 
     testWidgets('Should have a password field', (tester) async {
@@ -31,7 +31,7 @@ void main() {
 
       var password =
           find.text(AppLocalizations.translate('password').toUpperCase());
-      expectLater(password, findsOneWidget);
+      expect(password, findsOneWidget);
     });
 
     testWidgets('Should have two TextFields (email and password)',
@@ -40,7 +40,7 @@ void main() {
       await tester.pumpAndSettle();
 
       var textFields = find.byType(TextField);
-      expectLater(textFields, findsNWidgets(2));
+      expect(textFields, findsNWidgets(2));
     });
 
     testWidgets('Should have a login button', (tester) async {
@@ -48,10 +48,10 @@ void main() {
       await tester.pumpAndSettle();
 
       var login = find.text(AppLocalizations.translate('login').toUpperCase());
-      expectLater(login, findsOneWidget);
+      expect(login, findsOneWidget);
 
       var loginButton = find.byType(ElevatedButton);
-      expectLater(loginButton, findsOneWidget);
+      expect(loginButton, findsOneWidget);
     });
 
     testWidgets('Should have a register button', (tester) async {
@@ -60,7 +60,7 @@ void main() {
 
       var registerLink =
           find.text(AppLocalizations.translate('new_user_question'));
-      expectLater(registerLink, findsOneWidget);
+      expect(registerLink, findsOneWidget);
     });
 
     testWidgets('Should open register view if tapped', (tester) async {
@@ -68,13 +68,13 @@ void main() {
       await tester.pumpAndSettle();
 
       var newUser = find.text(AppLocalizations.translate('new_user_question'));
-      expectLater(newUser, findsOneWidget);
+      expect(newUser, findsOneWidget);
 
       await tester.tap(newUser);
       await tester.pump();
 
       var registerTitle = find.text(AppLocalizations.translate('register'));
-      expectLater(registerTitle, findsOneWidget);
+      expect(registerTitle, findsOneWidget);
     });
   });
 }

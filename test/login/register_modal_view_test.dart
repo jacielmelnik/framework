@@ -21,7 +21,7 @@ void main() {
       await tester.pumpAndSettle();
 
       var email = find.text(AppLocalizations.translate('email').toUpperCase());
-      expectLater(email, findsOneWidget);
+      expect(email, findsOneWidget);
     });
 
     testWidgets('Should have a password field', (tester) async {
@@ -30,7 +30,7 @@ void main() {
 
       var password =
           find.text(AppLocalizations.translate('password').toUpperCase());
-      expectLater(password, findsOneWidget);
+      expect(password, findsOneWidget);
     });
 
     testWidgets('Should have two TextFields (email and password)',
@@ -39,7 +39,7 @@ void main() {
       await tester.pumpAndSettle();
 
       var textFields = find.byType(TextField);
-      expectLater(textFields, findsNWidgets(2));
+      expect(textFields, findsNWidgets(2));
     });
 
     testWidgets('Should have a register button', (tester) async {
@@ -48,10 +48,10 @@ void main() {
 
       var register =
           find.text(AppLocalizations.translate('register').toUpperCase());
-      expectLater(register, findsOneWidget);
+      expect(register, findsOneWidget);
 
       var registerButton = find.byType(ElevatedButton);
-      expectLater(registerButton, findsOneWidget);
+      expect(registerButton, findsOneWidget);
     });
   });
 }
