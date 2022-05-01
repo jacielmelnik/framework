@@ -10,19 +10,19 @@ void main() {
     });
 
     test(
-        'fetchStoreItemsList should return "maçã, pêra, banana, abacaxi e manga" named StoreItems',
+        'fetchStoreItemsList should return "apple, pear, banana, pineapple and mango" named StoreItems',
         () async {
       var _list = StoreService.fetchStoreItemsList();
       expect(
-          null, isNot(_list.firstWhere((element) => element.name == 'maçã')));
+          null, isNot(_list.firstWhere((element) => element.name == 'apple')));
       expect(
-          null, isNot(_list.firstWhere((element) => element.name == 'pêra')));
+          null, isNot(_list.firstWhere((element) => element.name == 'pear')));
       expect(
           null, isNot(_list.firstWhere((element) => element.name == 'banana')));
       expect(null,
-          isNot(_list.firstWhere((element) => element.name == 'abacaxi')));
+          isNot(_list.firstWhere((element) => element.name == 'pineapple')));
       expect(
-          null, isNot(_list.firstWhere((element) => element.name == 'manga')));
+          null, isNot(_list.firstWhere((element) => element.name == 'mango')));
     });
   });
 }
