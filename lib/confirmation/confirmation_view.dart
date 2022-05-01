@@ -19,7 +19,7 @@ class ConfirmationView extends StatelessWidget {
           CartViewModel.selectedItemsCount(storeItemMap.values) *
               (Constants.kCartItemsHeight + 4) /* 64 */ +
           30 /* Product Quantity */ +
-          98 /* Title and dragabble indicator */,
+          106 /* Title and dragabble indicator */,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10.0),
@@ -105,7 +105,7 @@ class ConfirmationView extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
           Text(
             AppLocalizations.translate('successful_purchase'),
             style: TextStyle(
