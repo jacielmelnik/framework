@@ -11,7 +11,7 @@ class RegisterModalView extends StatefulWidget {
 }
 
 class _RegisterModalViewState extends State<RegisterModalView> {
-  bool? _isPasswordVisible = false;
+  bool _isPasswordVisible = false;
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
@@ -26,7 +26,7 @@ class _RegisterModalViewState extends State<RegisterModalView> {
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        //height: MediaQuery.of(context).size.height * 0.4,
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
           borderRadius: const BorderRadius.only(
@@ -35,10 +35,12 @@ class _RegisterModalViewState extends State<RegisterModalView> {
           ),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           verticalDirection: VerticalDirection.up,
           children: [
-            const Expanded(
-                child: SizedBox(height: Constants.kFixedBottonHeight)),
+            const SizedBox(
+              height: Constants.kFixedBottonHeight,
+            ),
             //REGISTER BUTTON
             ElevatedButton(
               onPressed: () {
@@ -84,17 +86,17 @@ class _RegisterModalViewState extends State<RegisterModalView> {
                       autofillHints: const [AutofillHints.password],
                       focusNode: _passwordFocusNode,
                       controller: LoginViewModel.passwordTextController(),
-                      obscureText: !_isPasswordVisible!,
+                      obscureText: !_isPasswordVisible,
                       decoration: InputDecoration(
                         isDense: true,
                         border: InputBorder.none,
                         suffixIcon: InkWell(
                           borderRadius: BorderRadius.circular(20),
                           onTap: () => setState(
-                            () => _isPasswordVisible = !_isPasswordVisible!,
+                            () => _isPasswordVisible = !_isPasswordVisible,
                           ),
                           child: Icon(
-                            _isPasswordVisible!
+                            _isPasswordVisible
                                 ? Icons.visibility_outlined
                                 : Icons.visibility_off_outlined,
                             size: 22,
