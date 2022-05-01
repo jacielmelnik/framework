@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF048A81),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-              ),
+                  primary: const Color(0xFF048A81),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  textStyle: GoogleFonts.lato(fontWeight: FontWeight.bold)),
             ),
             textTheme: GoogleFonts.latoTextTheme(
               Theme.of(context).textTheme,

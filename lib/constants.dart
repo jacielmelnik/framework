@@ -1,10 +1,10 @@
 class Constants {
   static const loginRouteName = '/LOGIN';
 
-  static const int kButtonHeight = 40;
-  static const int kFixedBottonHeight = 40;
+  static const double kButtonHeight = 40;
+  static const double kFixedBottonHeight = 40;
 
-  static const int kCartItemsHeight = 60;
+  static const double kCartItemsHeight = 40;
 }
 
 class AvailableLanguages {
