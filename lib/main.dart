@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:framework/constants.dart';
 import 'package:framework/init/init_view.dart';
 import 'package:framework/login/login_view.dart';
+import 'package:framework/store/blocs/search_bloc.dart';
 import 'package:framework/store/blocs/store_item_map_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<StoreItemMapBloc>(create: (_) => StoreItemMapBloc())
+        BlocProvider<StoreItemMapBloc>(create: (_) => StoreItemMapBloc()),
+        BlocProvider<SearchBloc>(create: (_) => SearchBloc())
       ],
       child: MaterialApp(
           title: 'Framework',
