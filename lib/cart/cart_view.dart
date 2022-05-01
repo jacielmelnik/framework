@@ -44,38 +44,42 @@ class _CartViewState extends State<CartView> {
             verticalDirection: VerticalDirection.up,
             children: [
               const SizedBox(height: 40),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    fixedSize:
-                        Size(MediaQuery.of(context).size.width * 0.8, 40)),
-                onPressed: () {
-                  //Showing the confirmation modal
-                  showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10.0),
-                        topRight: Radius.circular(10.0),
+              CartViewModel.selectedItemsCount(state.map!.values) == 0
+                  ? const SizedBox()
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: Size(
+                              MediaQuery.of(context).size.width * 0.8, 40)),
+                      onPressed: () {
+                        //Showing the confirmation modal
+                        showModalBottomSheet(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              topRight: Radius.circular(10.0),
+                            ),
+                          ),
+                          context: context,
+                          builder: (context) {
+                            final Map<String, int> _purchasedItemsMap =
+                                state.map!;
+                            return ConfirmationView(
+                                storeItemMap: _purchasedItemsMap);
+                          },
+                        ).whenComplete(() {
+                          //Cleaning the cart after finishing the checkout
+                          blocContext
+                              .read<StoreItemMapBloc>()
+                              .add(const ResetAllCounters());
+
+                          //Dismissing this modal
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: Text(
+                        AppLocalizations.translate('checkout').toUpperCase(),
                       ),
                     ),
-                    context: context,
-                    builder: (context) {
-                      final Map<String, int> _purchasedItemsMap = state.map!;
-                      return ConfirmationView(storeItemMap: _purchasedItemsMap);
-                    },
-                  ).whenComplete(() {
-                    //Cleaning the cart after finishing the checkout
-                    blocContext
-                        .read<StoreItemMapBloc>()
-                        .add(const ResetAllCounters());
-
-                    //Dismissing this modal
-                    Navigator.pop(context);
-                  });
-                },
-                child: Text(
-                  AppLocalizations.translate('checkout').toUpperCase(),
-                ),
-              ),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: CartViewModel.selectedItemsCount(state.map!.values),
@@ -145,21 +149,39 @@ class _CartViewState extends State<CartView> {
                 },
               ),
               const SizedBox(height: 8),
-              Text(
-                AppLocalizations.translate('my_cart'),
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).primaryColor,
-                    fontSize: Theme.of(context).textTheme.titleLarge!.fontSize),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                height: 4,
-                width: 40,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.black.withOpacity(0.25)),
-              ),
+              CartViewModel.selectedItemsCount(state.map!.values) == 0
+                  ? Text(
+                      AppLocalizations.translate('empty_cart'),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                          fontSize:
+                              Theme.of(context).textTheme.titleLarge!.fontSize),
+                    )
+                  : Column(
+                      verticalDirection: VerticalDirection.up,
+                      children: [
+                        Text(
+                          AppLocalizations.translate('my_cart'),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .fontSize),
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          height: 4,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: Colors.black.withOpacity(0.25),
+                          ),
+                        ),
+                      ],
+                    )
             ],
           ),
         );

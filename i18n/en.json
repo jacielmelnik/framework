@@ -22,5 +22,6 @@
     "my_cart": "My cart",
     "product": "Product",
     "quantity": "Quantity",
-    "successful_purchase": "Successful purchase!"
+    "successful_purchase": "Successful purchase!",
+    "empty_cart": "Empty cart!"
 }

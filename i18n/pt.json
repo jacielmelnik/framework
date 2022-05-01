@@ -22,5 +22,6 @@
     "my_cart": "Meu carrinho",
     "product": "Produto",
     "quantity": "Quantidade",
-    "successful_purchase": "Compra Realizada com sucesso!"
+    "successful_purchase": "Compra Realizada com sucesso!",
+    "empty_cart": "Carrinho vazio!"
 }
