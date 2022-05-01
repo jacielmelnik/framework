@@ -25,3 +25,7 @@ class ItemCounterReset extends StoreEvents {
 
   final String itemName;
 }
+
+class ResetAllCounters extends StoreEvents {
+  const ResetAllCounters();
+}

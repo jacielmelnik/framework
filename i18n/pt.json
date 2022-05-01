@@ -19,5 +19,8 @@
     "added": "No carrinho",
     "search": "Pesquisar",
     "ecommerce": "E-Commerce",
-    "my_cart": "Meu carrinho"
+    "my_cart": "Meu carrinho",
+    "product": "Produto",
+    "quantity": "Quantidade",
+    "successful_purchase": "Compra Realizada com sucesso!"
 }

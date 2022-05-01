@@ -49,11 +49,28 @@ class _CartViewState extends State<CartView> {
                     fixedSize:
                         Size(MediaQuery.of(context).size.width * 0.8, 40)),
                 onPressed: () {
+                  //Showing the confirmation modal
                   showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return ConfirmationView(storeItemMap: state.map!);
-                      });
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (context) {
+                      final Map<String, int> _purchasedItemsMap = state.map!;
+                      return ConfirmationView(storeItemMap: _purchasedItemsMap);
+                    },
+                  ).whenComplete(() {
+                    //Cleaning the cart after finishing the checkout
+                    blocContext
+                        .read<StoreItemMapBloc>()
+                        .add(const ResetAllCounters());
+
+                    //Dismissing this modal
+                    Navigator.pop(context);
+                  });
                 },
                 child: Text(
                   AppLocalizations.translate('checkout').toUpperCase(),

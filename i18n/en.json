@@ -19,5 +19,8 @@
     "added": "Added to cart",
     "search": "Search",
     "ecommerce": "E-Commerce",
-    "my_cart": "My cart"
+    "my_cart": "My cart",
+    "product": "Product",
+    "quantity": "Quantity",
+    "successful_purchase": "Successful purchase!"
 }
