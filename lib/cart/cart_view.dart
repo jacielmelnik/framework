@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework/cart/cart_view_model.dart';
 import 'package:framework/confirmation/confirmation_view.dart';
 import 'package:framework/shared/app_localizations.dart';
 import 'package:framework/store/blocs/store_events.dart';
@@ -18,10 +19,7 @@ class CartView extends StatefulWidget {
 class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StoreItemMapBloc, StoreItemMapState>(
-      listener: (context, state) {
-        setState(() {});
-      },
+    return BlocBuilder<StoreItemMapBloc, StoreItemMapState>(
       builder: (blocContext, state) {
         if (state.map == null) {
           return const SizedBox.shrink();
@@ -43,9 +41,13 @@ class _CartViewState extends State<CartView> {
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: state.map?.length,
+              //Ensuring the map will not be null when entering the cart view
+              itemCount: state.map == null
+                  ? 0
+                  : CartViewModel.selectedItemsCount(state.map!.values),
               itemBuilder: (context, index) {
-                StoreItem _storeItem = StoreViewModel.storeItemFromIndex(index);
+                StoreItem _storeItem =
+                    CartViewModel.selectedItemForIndex(state.map!, index);
                 int _storeItemCount = state.map![_storeItem.name]!;
 
                 return GestureDetector(
