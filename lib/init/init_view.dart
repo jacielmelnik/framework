@@ -17,6 +17,8 @@ class _InitViewState extends State<InitView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: Theme.of(context).primaryColor,
+    );
   }
 }
