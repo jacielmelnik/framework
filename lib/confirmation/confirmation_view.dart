@@ -1,4 +1,5 @@
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:framework/cart/cart_view_model.dart';
 import 'package:framework/confirmation/confirmation_view_model.dart';
@@ -35,9 +36,9 @@ class ConfirmationView extends StatelessWidget {
           const SizedBox(height: Constants.kFixedBottonHeight),
           ElevatedButton(
             onPressed: () async {
-              PDFDocument? savedDocument =
+              File? file =
                   await ConfirmationViewModel.generateReceipt(storeItemMap);
-              if (savedDocument != null) {
+              if (file != null) {
                 showModalBottomSheet(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -47,7 +48,9 @@ class ConfirmationView extends StatelessWidget {
                     ),
                     context: context,
                     builder: (context) {
-                      return ReceiptViewer(document: savedDocument);
+                      return ReceiptViewer(
+                        file: file,
+                      );
                     }).whenComplete(
                   () {
                     Navigator.pop(context);
